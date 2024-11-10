@@ -14,12 +14,12 @@ private:
 public:
     Hash(unsigned int size) : table(size), size(size) {}
 
-    void insert(const int& key, const int& value) {//добавление элемента
+    void insert(const int& key, const int& value) {//РґРѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°
         unsigned int index = key;
-        table[index].push_back(make_pair(key, value));//добавляем в index-ий элемент вектора в конец списка
+        table[index].push_back(make_pair(key, value));//РґРѕР±Р°РІР»СЏРµРј РІ index-РёР№ СЌР»РµРјРµРЅС‚ РІРµРєС‚РѕСЂР° РІ РєРѕРЅРµС† СЃРїРёСЃРєР°
     }
 
-    bool find(const int& key, int& value) const {//ищем значение если нашли возвращаем тру
+    bool find(const int& key, int& value) const {//РёС‰РµРј Р·РЅР°С‡РµРЅРёРµ РµСЃР»Рё РЅР°С€Р»Рё РІРѕР·РІСЂР°С‰Р°РµРј С‚СЂСѓ
         unsigned int index = key;
         for (auto& entry : table[index]) {
             if (entry.first == key) {
@@ -29,7 +29,7 @@ public:
         }
         return false;
     }
-    void print() const {//выводим всю таблицу
+    void print() const {//РІС‹РІРѕРґРёРј РІСЃСЋ С‚Р°Р±Р»РёС†Сѓ
         for (unsigned int i = 0; i < size; ++i) {
             cout << "Bucket " << i << ": ";
             for (auto& entry : table[i]) {
@@ -38,7 +38,7 @@ public:
             cout << endl;
         }
     }
-    unsigned int countCollisions() const {//считаем количество коллизий
+    unsigned int countCollisions() const {//СЃС‡РёС‚Р°РµРј РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕР»Р»РёР·РёР№
         unsigned int collisions = 0;
         for (const auto& bucket : table) {
             if (bucket.size() > 1) {
@@ -47,7 +47,7 @@ public:
         }
         return collisions;
     }
-    vector<pair<int, int>> longestCollisionChain() const {//ищем самую длинную коллизию
+    vector<pair<int, int>> longestCollisionChain() const {//РёС‰РµРј СЃР°РјСѓСЋ РґР»РёРЅРЅСѓСЋ РєРѕР»Р»РёР·РёСЋ
         unsigned int maxChainLength = 0;
         vector<pair<int, int>> longestChain;
 
@@ -59,7 +59,7 @@ public:
         }
         return longestChain;
     }
-    double calculateLoadFactor() const {//считаем степень заполненности таблицы (количество не пустых классов/на общее количество классов)
+    double calculateLoadFactor() const {//СЃС‡РёС‚Р°РµРј СЃС‚РµРїРµРЅСЊ Р·Р°РїРѕР»РЅРµРЅРЅРѕСЃС‚Рё С‚Р°Р±Р»РёС†С‹ (РєРѕР»РёС‡РµСЃС‚РІРѕ РЅРµ РїСѓСЃС‚С‹С… РєР»Р°СЃСЃРѕРІ/РЅР° РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєР»Р°СЃСЃРѕРІ)
         unsigned int itemsCount = 0;
         for (const auto& bucket : table) {
             if (bucket.size() > 0) {
